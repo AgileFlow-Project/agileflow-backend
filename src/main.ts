@@ -46,6 +46,12 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api/docs/', app, document);
 
+  app.enableCors({
+    origin: 'http://localhost:8888', // Adjust to match your Next.js frontend URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true, // If you need to allow cookies or authentication headers
+  });
+
   await app.listen(configService.get<number>('PORT', 3000));
 }
 
